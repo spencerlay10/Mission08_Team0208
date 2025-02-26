@@ -1,0 +1,61 @@
+@model Mission08_Team0208.Models.Task
+
+@{
+    ViewData["Title"] = "Add Task";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>AddEdit</title>
+</head>
+<body>
+<div>
+    <form method="post">
+
+        <input type="hidden" asp-for="TaskId" />
+        
+        <div>
+            <label asp-for="TaskTitle"></label>
+            <input asp-for="TaskTitle" required/>
+        </div>
+
+        <div>
+            <label asp-for="DueDate"></label>
+            <input asp-for="DueDate" type="date"/>
+        </div>
+
+        <div>
+            <label asp-for="Quadrant"></label>
+            <input asp-for="Quadrant" required/>
+        </div>
+
+        <div>
+            <label asp-for="CategoryId"></label>
+            <select asp-for="CategoryId" >
+                <option value="">Select a Category</option>
+                @foreach (Category m in ViewBag.Categories)
+                {
+                    <option value="@m.CategoryId">@m.CategoryName</option>
+                }
+            </select>
+        </div>
+
+        <div>
+            <label asp-for="Completed"></label>
+            <select asp-for="Completed">
+                <option value="false">No</option>
+                <option value="true">Yes</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+        
+        <div asp-validation-summary="All" class="text-danger mt-3"></div>
+        
+    </form>
+
+</div>
+</body>
+</html>
