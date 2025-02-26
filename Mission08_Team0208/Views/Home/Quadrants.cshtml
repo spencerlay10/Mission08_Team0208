@@ -18,7 +18,7 @@
                             <h5 class="card-title">@task.TaskTitle</h5>
                             @if (task.DueDate != null)
                             {
-                                <p class="card-text"><small>Due: @task.DueDate.Value.ToShortDateString()</small></p>
+                                <p class="card-text"><small>Due: @task.DueDate.ToShortDateString()</small></p>
                             }
                             <div class="btn-group">
                                 <a asp-controller="Home" asp-action="Edit" asp-route-id="@task.TaskId" class="btn btn-sm btn-primary">Edit</a>
@@ -41,7 +41,7 @@
                             <h5 class="card-title">@task.TaskTitle</h5>
                             @if (task.DueDate != null)
                             {
-                                <p class="card-text"><small>Due: @task.DueDate.Value.ToShortDateString()</small></p>
+                                <p class="card-text"><small>Due: @task.DueDate.ToShortDateString()</small></p>
                             }
                             <div class="btn-group">
                                 <a asp-controller="Home" asp-action="Edit" asp-route-id="@task.TaskId" class="btn btn-sm btn-primary">Edit</a>
