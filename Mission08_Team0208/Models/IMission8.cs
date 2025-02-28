@@ -8,5 +8,6 @@
         void AddTask(Task task);
         void UpdateInfo(Task task);
         void DeleteTask(Task task);
+        void MarkComplete(int taskId);
     }
 }

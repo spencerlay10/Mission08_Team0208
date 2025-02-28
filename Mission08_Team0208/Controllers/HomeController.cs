@@ -103,6 +103,13 @@ namespace Mission08_Team0208.Controllers
 
             return RedirectToAction("Quadrants");
         }
+
+        [HttpPost]
+        public IActionResult MarkComplete(int id)
+        {
+            _repo.MarkComplete(id);
+            return RedirectToAction("Quadrants");
+        }
     }
 
 }

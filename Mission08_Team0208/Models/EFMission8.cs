@@ -26,6 +26,16 @@ namespace Mission08_Team0208.Models
             _context.SaveChanges();
         }
 
+        public void MarkComplete(int taskId)
+        {
+            var task = _context.Tasks.FirstOrDefault(t => t.TaskId == taskId);
+            if (task != null)
+            {
+                task.Completed = true;
+                _context.SaveChanges();
+            }
+        }
+
         public void UpdateInfo(Task task)
         {
             _context.Update(task);
