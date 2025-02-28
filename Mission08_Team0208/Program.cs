@@ -12,6 +12,8 @@ builder.Services.AddDbContext<QuadrantContext>(options =>
     options.UseSqlite(builder.Configuration["ConnectionStrings:QuadrantConnection"]);
 });
 
+builder.Services.AddScoped<IMission8, EFMission8>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
