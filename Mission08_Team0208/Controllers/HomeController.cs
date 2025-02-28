@@ -20,7 +20,7 @@ namespace Mission08_Team0208.Controllers
         //Make index view appear
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Quadrants");
         }
 
 
@@ -36,16 +36,12 @@ namespace Mission08_Team0208.Controllers
             return View();
         }
 
-
-
-
         //Make AddTask view appear
 
         [HttpPost]
         public IActionResult AddTask(Mission08_Team0208.Models.Task response)
         {
-            _repo.Tasks.Add(response); //Add record to database
-            _repo.SaveChanges();
+            _repo.AddTask(response);
 
             return View("Confirmation", response);
         }
@@ -55,9 +51,9 @@ namespace Mission08_Team0208.Controllers
         //Create quadrants view by joining tables
         public IActionResult Quadrants()
         {
-            //Linq
-            var tasks = _repo.Tasks.Include(m => m.Category).ToList()
-                .OrderBy(x => x.TaskTitle).ToList();
+            var tasks = _repo.Tasks
+                .OrderBy(x => x.TaskTitle)
+                .ToList(); // Executes the query
 
             return View(tasks);
         }
@@ -82,9 +78,7 @@ namespace Mission08_Team0208.Controllers
         [HttpPost]
         public IActionResult Edit(Mission08_Team0208.Models.Task updatedInfo)
         {
-            _repo.Update(updatedInfo);
-            _repo.SaveChanges();
-
+            _repo.UpdateInfo(updatedInfo);
 
             return RedirectToAction("Quadrants");
         }
@@ -105,8 +99,7 @@ namespace Mission08_Team0208.Controllers
         [HttpPost]
         public IActionResult Delete(Mission08_Team0208.Models.Task movie)
         {
-            _repo.Tasks.Remove(movie);
-            _repo.SaveChanges();
+            _repo.DeleteTask(movie);
 
             return RedirectToAction("Quadrants");
         }

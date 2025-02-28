@@ -1,4 +1,5 @@
-﻿using SQLitePCL;
+﻿using Microsoft.EntityFrameworkCore;
+using SQLitePCL;
 
 namespace Mission08_Team0208.Models
 {
@@ -9,7 +10,28 @@ namespace Mission08_Team0208.Models
         {
             _context = temp;
         }
-        public List<Task> Tasks => _context.Tasks.ToList();
-        public List<Category> Categories => _context.Categories.ToList();
+
+        public IQueryable<Task> Tasks => _context.Tasks.Include(t => t.Category); // Now supports Include
+        public IQueryable<Category> Categories => _context.Categories;
+
+        public void AddTask(Task task)
+        {
+            _context.Tasks.Add(task);
+            _context.SaveChanges();
+        }
+
+        public void DeleteTask(Task task)
+        {
+            _context.Tasks.Remove(task);
+            _context.SaveChanges();
+        }
+
+        public void UpdateInfo(Task task)
+        {
+            _context.Update(task);
+            _context.SaveChanges();
+        }
     }
+
+
 }
