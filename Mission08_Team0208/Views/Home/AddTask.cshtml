@@ -4,59 +4,51 @@
     ViewData["Title"] = "Add Task";
 }
 
-<!DOCTYPE html>
+<div class="container mt-5">
+    <div class="card shadow p-4">
+        <h2 class="text-center mb-4">Add/Edit Task</h2>
+        <form method="post">
+            <input type="hidden" asp-for="TaskId" />
 
-<html>
-<head>
-    <title>AddEdit</title>
-</head>
-<body>
-<div>
-    <form method="post">
+            <div class="mb-3">
+                <label asp-for="TaskTitle" class="form-label">Task Title</label>
+                <input asp-for="TaskTitle" class="form-control" required />
+            </div>
 
-        <input type="hidden" asp-for="TaskId" />
-        
-        <div>
-            <label asp-for="TaskTitle">Task Title</label>
-            <input asp-for="TaskTitle" required/>
-        </div>
+            <div class="mb-3">
+                <label asp-for="DueDate" class="form-label">Due Date</label>
+                <input asp-for="DueDate" type="date" class="form-control" />
+            </div>
 
-        <div>
-            <label asp-for="DueDate">Due Date</label>
-            <input asp-for="DueDate" type="date"/>
-        </div>
+            <div class="mb-3">
+                <label asp-for="Quadrant" class="form-label">Quadrant</label>
+                <input asp-for="Quadrant" class="form-control" required />
+            </div>
 
-        <div>
-            <label asp-for="Quadrant">Quadrant</label>
-            <input asp-for="Quadrant" required/>
-        </div>
+            <div class="mb-3">
+                <label asp-for="CategoryId" class="form-label">Category</label>
+                <select asp-for="CategoryId" class="form-select">
+                    <option value="">Select a Category</option>
+                    @foreach (Category m in ViewBag.Categories)
+                    {
+                        <option value="@m.CategoryId">@m.CategoryName</option>
+                    }
+                </select>
+            </div>
 
-        <div>
-            <label asp-for="CategoryId">Category</label>
-            <select asp-for="CategoryId" >
-                <option value="">Select a Category</option>
-                @foreach (Category m in ViewBag.Categories)
-                {
-                    <option value="@m.CategoryId">@m.CategoryName</option>
-                }
-            </select>
-        </div>
+            <div class="mb-3">
+                <label asp-for="Completed" class="form-label">Completed</label>
+                <select asp-for="Completed" class="form-select">
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                </select>
+            </div>
 
-        <div>
-            <label asp-for="Completed">Completed</label>
-            <select asp-for="Completed">
-                <option value="false">No</option>
-                <option value="true">Yes</option>
-            </select>
-        </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
-        
-        <div asp-validation-summary="All" class="text-danger mt-3"></div>
-        
-    </form>
-
+            <div asp-validation-summary="All" class="text-danger mt-3"></div>
+        </form>
+    </div>
 </div>
-</body>
-</html>
-

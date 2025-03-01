@@ -33,7 +33,7 @@ namespace Mission08_Team0208.Controllers
             ViewBag.Categories = _repo.Categories
                 .OrderBy(x => x.CategoryName).ToList();
 
-            return View();
+            return View(new Mission08_Team0208.Models.Task() { DueDate = DateOnly.FromDateTime(DateTime.Today) });
         }
 
         //Make AddTask view appear
@@ -41,9 +41,19 @@ namespace Mission08_Team0208.Controllers
         [HttpPost]
         public IActionResult AddTask(Mission08_Team0208.Models.Task response)
         {
-            _repo.AddTask(response);
+            if (ModelState.IsValid)
+            {
+                _repo.AddTask(response);
 
-            return View("Confirmation", response);
+                return View("Confirmation", response);
+            }
+            else
+            {
+                ViewBag.Categories = _repo.Categories
+                    .OrderBy(x => x.CategoryName)
+                    .ToList();
+                return View(response);
+            }
         }
 
 
@@ -78,9 +88,20 @@ namespace Mission08_Team0208.Controllers
         [HttpPost]
         public IActionResult Edit(Mission08_Team0208.Models.Task updatedInfo)
         {
-            _repo.UpdateInfo(updatedInfo);
+            if (ModelState.IsValid)
+            {
+                _repo.UpdateInfo(updatedInfo);
 
-            return RedirectToAction("Quadrants");
+                return RedirectToAction("Quadrants");
+            }
+            else
+            {
+                ViewBag.Categories = _repo.Categories
+                    .OrderBy(x => x.CategoryName)
+                    .ToList();
+                return View("AddTask", updatedInfo);
+            }
+                
         }
 
 
